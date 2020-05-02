@@ -1,5 +1,4 @@
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import service.PersonService;
 
 public class Main {
@@ -11,7 +10,10 @@ public class Main {
         AnnotationConfigApplicationContext context =
                 new AnnotationConfigApplicationContext(AppConfig.class);
 
-        PersonService service = context.getBean(PersonService.class);
+        Properties properties = context.getBean(Properties.class);
+        String beanNameFromPropertyFile = properties.getBeanName();
+
+        PersonService service = (PersonService) context.getBean(beanNameFromPropertyFile);
 
         System.out.println(service.getPersonName());
     }

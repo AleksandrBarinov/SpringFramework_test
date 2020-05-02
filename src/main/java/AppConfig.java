@@ -1,18 +1,33 @@
 import dao.PersonRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.core.io.ClassPathResource;
 import service.PersonService;
 
+//@PropertySource("classpath:application.properties")
 @Configuration
 public class AppConfig {
+
+    @Bean
+    public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+        PropertySourcesPlaceholderConfigurer configurer = new PropertySourcesPlaceholderConfigurer();
+        configurer.setLocation(new ClassPathResource("application.properties"));
+        return configurer;
+    }
 
     @Bean
     PersonRepository personRepository() {
         return new PersonRepository();
     }
 
-    @Bean
+    @Bean(name = "test")
     PersonService personService(PersonRepository dao) {
         return new PersonService(dao);
+    }
+
+    @Bean
+    Properties properties() {
+        return new Properties();
     }
 }

@@ -1,13 +1,20 @@
 import dao.PersonRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.io.ClassPathResource;
 import service.PersonService;
 
 //@PropertySource("classpath:application.properties")
+@EnableAspectJAutoProxy
 @Configuration
 public class AppConfig {
+
+    @Bean
+    AspectTest aspectTest() {
+        return new AspectTest();
+    }
 
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {

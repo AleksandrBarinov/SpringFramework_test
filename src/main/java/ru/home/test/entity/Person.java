@@ -1,4 +1,4 @@
-package entity;
+package ru.home.test.entity;
 
 public class Person {
 

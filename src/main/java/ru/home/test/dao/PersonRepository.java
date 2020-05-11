@@ -1,6 +1,6 @@
-package dao;
+package ru.home.test.dao;
 
-import entity.Person;
+import ru.home.test.entity.Person;
 import org.springframework.stereotype.Repository;
 
 @Repository

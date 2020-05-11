@@ -1,8 +1,10 @@
+package ru.home.test.service;
+
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
 
@@ -12,12 +14,12 @@ import java.util.Arrays;
 @Component
 public class AspectTest {
 
-    @Before("execution(* service.PersonService.*(..))")
+    @Before("execution(* ru.home.test.service.PersonService.*(..))")
     public void logBefore(JoinPoint joinPoint) {
         System.out.println("@Before - Method name: " + joinPoint.getSignature().getName());
     }
 
-    @Around("execution(* service.PersonService.*(..))")
+    @Around("execution(* ru.home.test.service.PersonService.*(..))")
     public Object logAround(ProceedingJoinPoint joinPoint) throws Throwable {
         System.out.println("@Around - Method name: " + joinPoint.getSignature().getName());
         System.out.println("@Around - Get args: " + Arrays.toString(joinPoint.getArgs()));
@@ -26,7 +28,7 @@ public class AspectTest {
         return ret;
     }
 
-    @AfterReturning(pointcut = "execution(* service.PersonService.*(..))", returning = "result")
+    @AfterReturning(pointcut = "execution(* ru.home.test.service.PersonService.*(..))", returning = "result")
     public void logAfterReturning(JoinPoint joinPoint, Object result) {
         System.out.println("Method name: " + joinPoint.getSignature().getName());
         System.out.println("Method returned value is: " + result);

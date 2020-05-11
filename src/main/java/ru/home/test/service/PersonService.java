@@ -1,6 +1,6 @@
-package service;
+package ru.home.test.service;
 
-import dao.PersonRepository;
+import ru.home.test.dao.PersonRepository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;

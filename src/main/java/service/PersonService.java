@@ -1,7 +1,11 @@
 package service;
 
 import dao.PersonRepository;
+import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
+
+@Service
 public class PersonService {
 
     private final PersonRepository personRepository;
@@ -10,7 +14,8 @@ public class PersonService {
         this.personRepository = personRepository;
     }
 
-    public String getPersonName() {
-        return personRepository.getPerson().getName();
+    @PostConstruct
+    public void getPersonName() {
+        System.out.println(personRepository.getPerson().getName());
     }
 }

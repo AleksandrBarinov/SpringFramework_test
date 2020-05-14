@@ -1,9 +1,7 @@
 package ru.home.test.service;
 
-import ru.home.test.dao.PersonRepository;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.PostConstruct;
+import ru.home.test.dao.PersonRepository;
 
 @Service
 public class PersonService {
@@ -14,8 +12,7 @@ public class PersonService {
         this.personRepository = personRepository;
     }
 
-    @PostConstruct
-    public void getPersonName() {
-        System.out.println(personRepository.getPerson().getName());
+    public String getPersonName() {
+        return personRepository.getPerson().getName();
     }
 }

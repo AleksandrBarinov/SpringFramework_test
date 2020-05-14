@@ -30,7 +30,7 @@ public class AspectTest {
 
     @AfterReturning(pointcut = "execution(* ru.home.test.service.PersonService.*(..))", returning = "result")
     public void logAfterReturning(JoinPoint joinPoint, Object result) {
-        System.out.println("Method name: " + joinPoint.getSignature().getName());
-        System.out.println("Method returned value is: " + result);
+        System.out.println("@AfterReturning - Method name: " + joinPoint.getSignature().getName());
+        System.out.println("@AfterReturning - Method returned value is: " + result);
     }
 }

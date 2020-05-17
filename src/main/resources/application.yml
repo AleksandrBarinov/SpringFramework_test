@@ -1,0 +1,4 @@
+application:
+  customProperty: false
+server:
+  port: 8081

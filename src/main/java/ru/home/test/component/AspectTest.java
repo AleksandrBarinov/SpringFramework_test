@@ -1,4 +1,4 @@
-package ru.home.test.service;
+package ru.home.test.component;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;

@@ -1,9 +1,10 @@
 package ru.home.test.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import ru.home.test.entity.Person;
 import ru.home.test.service.PersonService;
+
+import java.util.Optional;
 
 @RestController
 public class MainController {
@@ -14,8 +15,14 @@ public class MainController {
         this.personService = personService;
     }
 
-    @GetMapping("test")
-    public String test(@RequestParam Integer id) {
-        return personService.getPersonName() + " " + id;
+    @PostMapping("addPerson")
+    public int add(@RequestBody Person person) {
+        return personService.addNewPerson(person);
+    }
+
+    @GetMapping("getPerson")
+    public Person get(@RequestParam Integer id) {
+        Optional<Person> person = personService.getPerson(id);
+        return person.orElse(null);
     }
 }

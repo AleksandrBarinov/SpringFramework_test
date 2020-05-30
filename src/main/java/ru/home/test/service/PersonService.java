@@ -1,8 +1,11 @@
 package ru.home.test.service;
 
 import org.springframework.stereotype.Service;
-import ru.home.test.Properties;
+import ru.home.test.component.Properties;
 import ru.home.test.dao.PersonRepository;
+import ru.home.test.entity.Person;
+
+import java.util.Optional;
 
 @Service
 public class PersonService {
@@ -19,7 +22,11 @@ public class PersonService {
         this.customProperty = properties.isCustomProperty();
     }
 
-    public String getPersonName() {
-        return personRepository.getPerson().getName() + " " + customProperty;
+    public int addNewPerson(Person person) {
+        return personRepository.save(person).getId();
+    }
+
+    public Optional<Person> getPerson(Integer id) {
+        return personRepository.findById(id);
     }
 }

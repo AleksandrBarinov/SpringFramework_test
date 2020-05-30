@@ -1,14 +1,9 @@
 package ru.home.test.dao;
 
+import org.springframework.data.repository.CrudRepository;
 import ru.home.test.entity.Person;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class PersonRepository {
-
-    public Person getPerson() {
-        Person person = new Person();
-        person.setName("Ivan");
-        return person;
-    }
+public interface PersonRepository extends CrudRepository<Person, Integer> {
 }

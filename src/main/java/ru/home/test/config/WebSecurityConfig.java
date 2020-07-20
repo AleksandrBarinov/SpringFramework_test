@@ -6,7 +6,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import ru.home.test.service.UserService;
 
 @Configuration
@@ -21,14 +21,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userService).passwordEncoder(NoOpPasswordEncoder.getInstance());
+        auth.userDetailsService(userService).passwordEncoder(new BCryptPasswordEncoder());
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.httpBasic().and().authorizeRequests()
+        http.csrf().disable().httpBasic().and().authorizeRequests()
                 .antMatchers(HttpMethod.GET,"/getPerson/").hasRole("user")
-                .antMatchers(HttpMethod.POST,"/addPerson/").hasRole("user");
+                .antMatchers(HttpMethod.POST,"/addPerson/").hasRole("user")
+                .antMatchers(HttpMethod.POST,"/addUser/").hasRole("admin")
+                .antMatchers(HttpMethod.GET,"/actuator").hasRole("admin")
+        ;
     }
 }

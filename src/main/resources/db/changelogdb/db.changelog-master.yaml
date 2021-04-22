@@ -1,0 +1,15 @@
+databaseChangeLog:
+  - include:
+      file: db/sql/create/001_create_person.sql
+  - include:
+      file: db/sql/create/002_create_person_aud.sql
+  - include:
+      file: db/sql/create/003_create_users_roles.sql
+  - include:
+      file: db/sql/create/004_add_constrains.sql
+  - include:
+      file: db/sql/insert/001_insert_into_users.sql
+  - include:
+      file: db/sql/insert/002_insert_into_role.sql
+  - include:
+      file: db/sql/insert/003_insert_into_users_roles.sql

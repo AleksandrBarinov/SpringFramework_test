@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.home.test.service.dto.UserDto;
 import ru.home.test.domain.repository.RoleRepository;
 import ru.home.test.domain.repository.UserRepository;
@@ -41,23 +42,27 @@ public class UserService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("user not found"));
     }
 
+    @Transactional
     public void addNewUser(UserDto userDto) throws NotFoundException {
 
         Set<Role> roles = new HashSet<>();
-        Role role1 = roleRepository.findByName(userDto.getRole())
-                .orElseThrow(() -> new NotFoundException("role not found"));
-        roles.add(role1);
 
-        Optional<User> user = userRepository.findByUsername(userDto.getName());
-        if (user.isPresent() && user.get().getRoles().contains(role1)) {
+        Role role = roleRepository.findByName(userDto.getRole())
+                .orElseThrow(() -> new NotFoundException("role not found"));
+        roles.add(role);
+
+        Optional<User> foundUser = userRepository.findByUsername(userDto.getName());
+
+        if (foundUser.isPresent() && foundUser.get().getRoles().contains(role)) {
             throw new NotFoundException("user with this role already exist");
         }
 
-        User user1 = new User();
-        user1.setUsername(userDto.getName());
-        user1.setPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
-        user1.setRoles(roles);
+        User newUser = new User();
 
-        userRepository.save(user1);
+        newUser.setUsername(userDto.getName());
+        newUser.setPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
+        newUser.setRoles(roles);
+
+        userRepository.save(newUser);
     }
 }

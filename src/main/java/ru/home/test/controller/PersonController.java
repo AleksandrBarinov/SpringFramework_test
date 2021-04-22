@@ -1,30 +1,38 @@
 package ru.home.test.controller;
 
-import javassist.NotFoundException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import ru.home.test.service.dto.UserDto;
 import ru.home.test.domain.model.Person;
 import ru.home.test.service.PersonService;
-import ru.home.test.service.UserService;
+import ru.home.test.service.dto.PersonDto;
 
 import java.util.Optional;
 
 @RestController
-public class MainController {
+public class PersonController {
 
     private final PersonService personService;
-    private final UserService userService;
 
-    public MainController(PersonService personService, UserService userService) {
+    public PersonController(PersonService personService) {
         this.personService = personService;
-        this.userService = userService;
     }
 
     @PostMapping("addPerson")
     @PreAuthorize("hasAnyAuthority('admin','user')")
-    public int add(@RequestBody Person person) {
+    public int add(@RequestBody PersonDto person) {
         return personService.addNewPerson(person);
+    }
+
+    @PutMapping("editPerson")
+    @PreAuthorize("hasAnyAuthority('admin','user')")
+    public String edit(@RequestBody PersonDto person) {
+        return personService.editPerson(person);
+    }
+
+    @DeleteMapping("deletePerson")
+    @PreAuthorize("hasAnyAuthority('admin','user')")
+    public String delete(@RequestParam Integer id) {
+        return personService.deletePerson(id);
     }
 
     @GetMapping("getPerson")
@@ -32,11 +40,5 @@ public class MainController {
     public Person get(@RequestParam Integer id) {
         Optional<Person> person = personService.getPerson(id);
         return person.orElse(null);
-    }
-
-    @PreAuthorize("hasAuthority('admin')")
-    @PostMapping("addUser")
-    public void addUser(@RequestBody UserDto userDto) throws NotFoundException {
-        userService.addNewUser(userDto);
     }
 }

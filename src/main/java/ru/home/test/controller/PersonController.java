@@ -37,8 +37,7 @@ public class PersonController {
 
     @GetMapping("getPerson")
     @PreAuthorize("hasAnyAuthority('admin','user')")
-    public Person get(@RequestParam Integer id) {
-        Optional<Person> person = personService.getPerson(id);
-        return person.orElse(null);
+    public PersonDto get(@RequestParam Integer id) {
+        return personService.getPerson(id);
     }
 }

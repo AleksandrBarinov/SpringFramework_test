@@ -43,7 +43,7 @@ public class UserService implements UserDetailsService {
     }
 
     @Transactional
-    public void addNewUser(UserDto userDto) throws NotFoundException {
+    public String addNewUser(UserDto userDto) throws NotFoundException {
 
         Set<Role> roles = new HashSet<>();
 
@@ -54,15 +54,30 @@ public class UserService implements UserDetailsService {
         Optional<User> foundUser = userRepository.findByUsername(userDto.getName());
 
         if (foundUser.isPresent() && foundUser.get().getRoles().contains(role)) {
-            throw new NotFoundException("user with this role already exist");
+            return "user with this role already exist";
         }
 
-        User newUser = new User();
+        User newUser;
+        User userToUpdate;
 
-        newUser.setUsername(userDto.getName());
-        newUser.setPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
-        newUser.setRoles(roles);
+        if (foundUser.isPresent()) {
+            userToUpdate = foundUser.get();
+            userToUpdate.getRoles().add(role);
+            userRepository.save(userToUpdate);
+            return "user " + userDto.getName()
+                    + " is assigned " + userDto.getRole() + " role";
+        } else {
 
-        userRepository.save(newUser);
+            newUser = new User();
+
+            newUser.setUsername(userDto.getName());
+            newUser.setPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
+            newUser.setRoles(roles);
+
+            userRepository.save(newUser);
+            return "user " + userDto.getName()
+                    + " with role " + userDto.getRole()
+                    + " was created";
+        }
     }
 }

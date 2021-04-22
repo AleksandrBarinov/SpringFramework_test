@@ -16,7 +16,7 @@ public class PersonMapperTest {
         Person person = new Person();
         person.setId(1);
         person.setAge(31);
-        person.setName("spidey");
+        person.setName("pumpkin");
 
         PersonDto personDto = mapper.toDto(person);
 

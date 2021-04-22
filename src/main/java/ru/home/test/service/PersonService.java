@@ -3,9 +3,8 @@ package ru.home.test.service;
 import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.home.test.config.Properties;
-import ru.home.test.domain.repository.PersonRepository;
 import ru.home.test.domain.model.Person;
+import ru.home.test.domain.repository.PersonRepository;
 import ru.home.test.mapper.PersonMapper;
 import ru.home.test.service.dto.PersonDto;
 
@@ -16,16 +15,10 @@ public class PersonService {
 
     private final PersonRepository personRepository;
 
-    private boolean customProperty;
-
     private final PersonMapper mapper = Mappers.getMapper(PersonMapper.class);
 
-    public PersonService(
-            PersonRepository personRepository,
-            Properties properties
-    ) {
+    public PersonService(PersonRepository personRepository) {
         this.personRepository = personRepository;
-        this.customProperty = properties.isCustomProperty();
     }
 
     @Transactional
@@ -58,7 +51,8 @@ public class PersonService {
     }
 
     @Transactional(readOnly = true)
-    public Optional<Person> getPerson(Integer id) {
-        return personRepository.findById(id);
+    public PersonDto getPerson(Integer id) {
+        Optional<Person> person = personRepository.findById(id);
+        return person.map(mapper::toDto).orElse(null);
     }
 }

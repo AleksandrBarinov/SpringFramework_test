@@ -19,7 +19,7 @@ public class UserController {
 
     @PreAuthorize("hasAuthority('admin')")
     @PostMapping("addUser")
-    public void addUser(@RequestBody UserDto userDto) throws NotFoundException {
-        userService.addNewUser(userDto);
+    public String addUser(@RequestBody UserDto userDto) throws NotFoundException {
+        return userService.addNewUser(userDto);
     }
 }

@@ -1,6 +1,7 @@
 package ru.home.test.domain.model;
 
 import lombok.Data;
+import org.hibernate.envers.Audited;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +10,7 @@ import javax.persistence.Id;
 
 @Data
 @Entity
+@Audited
 public class Person {
 
     @Id

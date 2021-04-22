@@ -1,9 +1,9 @@
 package ru.home.test.service;
 
 import org.springframework.stereotype.Service;
-import ru.home.test.component.Properties;
-import ru.home.test.dao.PersonRepository;
-import ru.home.test.entity.Person;
+import ru.home.test.config.Properties;
+import ru.home.test.domain.repository.PersonRepository;
+import ru.home.test.domain.model.Person;
 
 import java.util.Optional;
 

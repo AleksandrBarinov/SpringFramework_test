@@ -14,7 +14,7 @@ import ru.home.test.service.UserService;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private UserService userService;
+    private final UserService userService;
 
     public WebSecurityConfig(UserService userService) {
         this.userService = userService;

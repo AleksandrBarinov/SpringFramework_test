@@ -1,4 +1,4 @@
-package ru.home.test.component;
+package ru.home.test.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;

@@ -11,9 +11,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import ru.home.test.Main;
-import ru.home.test.component.Properties;
-import ru.home.test.dao.PersonRepository;
-import ru.home.test.entity.Person;
+import ru.home.test.config.Properties;
+import ru.home.test.domain.repository.PersonRepository;
+import ru.home.test.domain.model.Person;
 import ru.home.test.service.PersonService;
 
 import java.util.Optional;

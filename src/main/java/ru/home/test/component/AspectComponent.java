@@ -12,7 +12,7 @@ import java.util.Arrays;
 
 @Aspect
 @Component
-public class AspectTest {
+public class AspectComponent {
 
     @Before("execution(* ru.home.test.service.PersonService.*(..))")
     public void logBefore(JoinPoint joinPoint) {

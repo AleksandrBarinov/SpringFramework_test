@@ -3,8 +3,8 @@ package ru.home.test.controller;
 import javassist.NotFoundException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import ru.home.test.controller.pojo.NewUser;
-import ru.home.test.entity.Person;
+import ru.home.test.service.dto.UserDto;
+import ru.home.test.domain.model.Person;
 import ru.home.test.service.PersonService;
 import ru.home.test.service.UserService;
 
@@ -36,7 +36,7 @@ public class MainController {
 
     @PreAuthorize("hasAuthority('admin')")
     @PostMapping("addUser")
-    public void addUser(@RequestBody NewUser newUser) throws NotFoundException {
-        userService.addNewUser(newUser);
+    public void addUser(@RequestBody UserDto userDto) throws NotFoundException {
+        userService.addNewUser(userDto);
     }
 }

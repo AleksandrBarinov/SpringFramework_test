@@ -1,8 +1,8 @@
-package ru.home.test.dao;
+package ru.home.test.domain.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-import ru.home.test.entity.User;
+import ru.home.test.domain.model.User;
 
 import java.util.Optional;
 

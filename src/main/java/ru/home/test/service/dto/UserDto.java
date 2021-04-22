@@ -1,11 +1,13 @@
-package ru.home.test.controller.pojo;
+package ru.home.test.service.dto;
 
 import lombok.Data;
 
 @Data
-public class NewUser {
+public class UserDto {
 
     private String name;
+
     private String password;
+
     private String role;
 }

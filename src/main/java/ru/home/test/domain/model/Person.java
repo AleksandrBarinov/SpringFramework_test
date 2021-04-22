@@ -1,4 +1,4 @@
-package ru.home.test.entity;
+package ru.home.test.domain.model;
 
 import lombok.Data;
 

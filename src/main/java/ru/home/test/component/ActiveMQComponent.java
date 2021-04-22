@@ -10,11 +10,11 @@ import javax.annotation.PostConstruct;
 import javax.jms.Message;
 
 @Component
-public class ActiveMQTest {
+public class ActiveMQComponent {
 
     private final ApplicationContext context;
 
-    public ActiveMQTest(ApplicationContext context) {
+    public ActiveMQComponent(ApplicationContext context) {
         this.context = context;
     }
 
@@ -24,15 +24,15 @@ public class ActiveMQTest {
         jms.convertAndSend("foo.bar", "test message 2");
     }
 
-    @PostConstruct
-    public void testReceiveMessage() {
-        JmsTemplate jms = context.getBean(JmsTemplate.class);
-        Message message = jms.receive("foo.bar.incoming");
-
-        assert message != null;
-        ByteSequence bytes = ((ActiveMQTextMessage) message).getContent();
-        String stringMessage = new String(bytes.data);
-
-        System.out.println(stringMessage);
-    }
+//    @PostConstruct
+//    public void testReceiveMessage() {
+//        JmsTemplate jms = context.getBean(JmsTemplate.class);
+//        Message message = jms.receive("foo.bar.incoming");
+//
+//        assert message != null;
+//        ByteSequence bytes = ((ActiveMQTextMessage) message).getContent();
+//        String stringMessage = new String(bytes.data);
+//
+//        System.out.println(stringMessage);
+//    }
 }

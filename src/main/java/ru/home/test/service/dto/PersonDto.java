@@ -1,6 +1,13 @@
 package ru.home.test.service.dto;
 
+import lombok.Data;
+
+@Data
 public class PersonDto {
 
-    //TODO
+    private int id;
+
+    private String name;
+
+    private int age;
 }

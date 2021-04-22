@@ -20,7 +20,7 @@ public class User implements UserDetails {
     private String username;
     private String password;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private Set<Role> roles;
 
     @Override

@@ -3,6 +3,9 @@ application:
 server:
   port: 8081
 spring:
+  jackson:
+    serialization:
+      fail-on-empty-beans: true
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres
     username: postgres

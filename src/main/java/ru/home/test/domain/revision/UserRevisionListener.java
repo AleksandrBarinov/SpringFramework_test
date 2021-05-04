@@ -4,6 +4,8 @@ import org.hibernate.envers.RevisionListener;
 
 /**
  * Custom revision listener.
+ *
+ * @author Aleksandr Barinov
  */
 class UserRevisionListener implements RevisionListener {
 
